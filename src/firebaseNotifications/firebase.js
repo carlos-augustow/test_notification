@@ -4,6 +4,7 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAP-zGOyrVw5x4tgkVVk3Nre0_Cu6YfZJE",
   authDomain: "second-14d46.firebaseapp.com",
@@ -21,7 +22,9 @@ const messaging = getMessaging();
 export const requestForToken = () => {
   // The method getToken(): Promise<string> allows FCM to use the VAPID key credential
   // when sending message requests to different push services
-  return getToken(messaging, { vapidKey: `BJDlFDwWingEqHCk7d8jppFqK-BAp841oU8qawoHVxNdZ3XgpI_0ZeiFY_wO98NIJ_tWQmiXLuKr8HWIJaCz_9xlaJWYm5rtasIjozUl_wdqVQ4cE` }) //to authorize send requests to supported web push services
+  return getToken(messaging, {
+    vapidKey: `BAp841oU8qawoHVxNdZ3XgpI_0ZeiFY_wO98NIJ_tWQmiXLuKr8HWIJaCz_9xlaJWYm5rtasIjozUl_wdqVQ4cE`,
+  }) //to authorize send requests to supported web push services
     .then((currentToken) => {
       if (currentToken) {
         console.log("current token for client: ", currentToken);
