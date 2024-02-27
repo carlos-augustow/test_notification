@@ -8,12 +8,14 @@ const Notification = () => {
 
   function ToastDisplay() {
     return (
-      <div>
-        <p>
-          <b>{notification?.title}</b>
-        </p>
-        <p>{notification?.body}</p>
-      </div>
+      <ToastContainer>
+        <div>
+          <p>
+            <b>{notification?.title}</b>
+          </p>
+          <p>{notification?.body}</p>
+        </div>
+      </ToastContainer>
     );
   }
 
