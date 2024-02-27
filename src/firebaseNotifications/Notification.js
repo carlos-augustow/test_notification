@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { requestForToken, onMessageListener } from "./firebase";
 // import { ToastContainer, toast } from "react-toastify";
 
