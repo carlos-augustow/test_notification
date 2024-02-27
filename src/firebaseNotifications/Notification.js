@@ -1,33 +1,27 @@
-import React, {useState, useEffect} from 'react'
-import {requestForToken, onMessageListener} from './firebase';
-import {ToastContainer, toast} from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { requestForToken, onMessageListener } from "./firebase";
+// import { ToastContainer, toast } from "react-toastify";
 
 const Notification = () => {
-    const [notification, setNotification] = useState({title: '', body: ''});
-    const notify = () => toast(<ToastDisplay/>);
+  const [notification, setNotification] = useState({ title: "", body: "" });
 
-    function ToastDisplay() {
-        return (
-            <div>
-                <p><b>{notification?.title}</b></p>
-                <p>{notification?.body}</p>
-            </div>
-        );
-    };
-
-    useEffect(() => {
-        if (notification?.title) {
-            notify()
+  useEffect(() => {
+    if (notification?.title) {
+      window.Notification.requestPermission((permission) => {
+        if (permission === "granted") {
+          new window.Notification({ title: notification.title, body: notification.body });
         }
-    }, [notification])
+      });
+    }
+  }, [notification]);
 
-    requestForToken();
+  requestForToken();
 
-    onMessageListener()
-        .then((payload) => {
-            setNotification({title: payload?.notification?.title, body: payload?.notification?.body});
-        })
-        .catch((err) => console.log('failed: ', err));
-}
+  onMessageListener()
+    .then((payload) => {
+      setNotification({ title: payload?.notification?.title, body: payload?.notification?.body });
+    })
+    .catch((err) => console.log("failed: ", err));
+};
 
-export default Notification
+export default Notification;
