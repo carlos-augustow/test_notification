@@ -37,9 +37,6 @@ export const requestForToken = () => {
       } else {
         console.log("No registration token available. Request permission to generate one.");
       }
-    })
-    .catch((err) => {
-      console.log("An error occurred while retrieving token. ", err);
     });
 };
 
